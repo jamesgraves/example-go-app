@@ -439,7 +439,7 @@ HEAD is now at 6f8ced7... New functionality.
 
 And now they can just run the app, continue developing, and
 everything, all without having to worry about the other external
-libraries.  Or learning anything about 'git subtree' or worry about
+libraries.  Or learning anything about 'git subtree' or worrying about
 the upstream libraries.
 
 ```
