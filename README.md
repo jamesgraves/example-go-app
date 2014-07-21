@@ -29,7 +29,7 @@ My DVCS of choice is [`git`](http://www.git-scm.org), and recent
 versions of git now have the [`git
 subtree`](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)
 command which makes working with separate library projects smoother than
-before (such as with using the `git submodule` command).
+before (definitely so compared to using the `git submodule` command).
 
 This project is intended to be an example of my preferred workflow
 with Go and `git subtree` which makes things relatively easy for the
@@ -40,8 +40,8 @@ Development Scenario
 ====================
 
 We're going to be writing a small application for our company
-'example.com', and we're going to need a couple different libraries for
-this project.
+'example.com', and we're going to need a couple of different libraries
+for this project.
 
 In one case, with the [upsilon
 project](https://github.com/jamesgraves/upsilon), we don't anticipate
@@ -138,7 +138,7 @@ From github.com:jamesgraves/omicron
  * [new branch]      working    -> omicron-vendor/working
 ```
 
-Don't worry about the 'no common commits' that is to be expected.
+Don't worry about the 'no common commits', that is to be expected.
 
 As before, I had already created 'working' branches, so you may want
 to do that first.  Otherwise, you can push / pull from master in all
@@ -192,6 +192,10 @@ aren't going to change location for where it lives in our project
 directory.  It is going to end up in the same place as if we had just
 run `go get github.com/upstream-author/upsilon` (if upstream-author
 actually existed).
+
+By not changing the directory heirarchy, that reduces the need to
+change the import paths of other code that also uses the upsilon
+library.
 
 ```
 $ mkdir -p src/github.com/upstream-author
@@ -303,7 +307,7 @@ import ( "fmt" )
 func Bar() {
 	fmt.Println("This is Bar() from package upsilon, with a small bugfix.")
 }
-git commit -m 'Bugfix for print.' src/github.com/upstream-author/upsilon/lib.go
+$ git commit -m 'Bugfix for print.' src/github.com/upstream-author/upsilon/lib.go
 [working c4d49fb] Bugfix for print.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
@@ -318,7 +322,7 @@ itself, just to our application project.
 
 Since that won't really help the other users of the upsilon library
 (because our main project may not be public), we need to push that bug
-fix back to our fork on upsilon.  
+fix back to our fork of upsilon.  
 
 ```
 $ git subtree push --prefix=src/github.com/upstream-author/upsilon upsilon-vendor working
@@ -357,7 +361,8 @@ To git@github.com:jamesgraves/example-go-app.git
 ```
 
 And finally we can push our new functionality to our fork of omicron
-so that other users of the omicron library can easily get it too.
+so that other users of our version of the omicron library can easily get
+it too.
 
 ```
 $ git subtree push --prefix=src/github.com/jamesgraves/omicron omicron-vendor working
@@ -381,8 +386,7 @@ If we later see an update to upsilon, we can pull that to our GitHub
 fork, and then pull it into our project.
 
 ```
-$ git subtree pull --prefix src/github.com/upstream-author/upsilon
-upsilon-vendor working --squash
+$ git subtree pull --prefix src/github.com/upstream-author/upsilon upsilon-vendor working --squash
 ```
 You'll be offered to edit the merge commit message.
 
@@ -431,11 +435,12 @@ do so (now or later) by using -b with the checkout command again. Example:
 HEAD is now at 6f8ced7... New functionality.
 
 ```
-That's all standard git stuff.
+**That's all standard git stuff.**
 
 And now they can just run the app, continue developing, and
 everything, all without having to worry about the other external
-libraries.
+libraries.  Or learning anything about 'git subtree' or worry about
+the upstream libraries.
 
 ```
 $ git remote show origin
