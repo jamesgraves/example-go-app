@@ -26,8 +26,8 @@ furthermore I want to use a dependency management scheme that is not
 Go-specific.
 
 My DVCS of choice is [`git`](http://www.git-scm.org), and recent
-versions of git now have the `[git
-subtree](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)`
+versions of git now have the [`git
+subtree`](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)
 command which makes working with separate library projects smoother than
 before (such as with using the `git submodule` command).
 
