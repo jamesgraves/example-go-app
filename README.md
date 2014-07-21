@@ -328,8 +328,8 @@ To git@github.com:jamesgraves/upsilon.git
    e8ffa07..f920c4f  f920c4f0d3e9df6b3fc52988a192fd39cfa72bb4 -> working
 ```
 
-So this is going to push the f920c4f back to our fork at
-github.com:jamesgraves/upsilon, and from there we can open a pull
+So this is going to push the `f920c4f` back to our fork at
+`github.com:jamesgraves/upsilon`, and from there we can open a pull
 request with upstream-author for this bug fix.
 
 The situation will be similar for adding new functionality to our fork
@@ -478,6 +478,3 @@ suited to the task.
 
 As always, if you see any errors or problems with this, please feel
 free to send me fixes.
-
-
-If you've found
