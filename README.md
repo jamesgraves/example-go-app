@@ -10,11 +10,11 @@ Introduction
 There are many ways to build and maintain a Go project that requires
 external libraries.
 
-The simplest way, that is built into the Go toolchain itself is to
-just run `go get` on all your dependancies, and hope that the library
-authors don't ever introduct breaking changes into their code.  For
-small and personal projects, that is fine, but for people who are
-writing code for a living, that isn't good enough.
+The simplest way (which is already built into the Go toolchain itself)
+is to just run `go get` on all your dependancies, and hope that the
+library authors don't ever introduce breaking changes into their code. 
+For small and personal projects that is fine, but for people who are
+writing code for a living, that isn't nearly good enough.
 
 There are many tools that have sprouted up among the Go community for
 managing library dependencies.  You can visit the [Go
@@ -22,17 +22,17 @@ Wiki](https://code.google.com/p/go-wiki/wiki/PackageManagementTools)
 for some of the popular ones.
 
 However, for my work, I don't wish to use any of those tools, and
-further more I want to use a dependency management scheme that is not
+furthermore I want to use a dependency management scheme that is not
 Go-specific.
 
 My DVCS of choice is [`git`](http://www.git-scm.org), and recent
-versions of git now have the [`git subtree`
-command](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)
-which makes working with separate library projects smoother than
+versions of git now have the `[git
+subtree](http://blogs.atlassian.com/2013/05/alternatives-to-git-submodule-git-subtree/)`
+command which makes working with separate library projects smoother than
 before (such as with using the `git submodule` command).
 
 This project is intended to be an example of my preferred workflow
-with Go, and `git subtree` that makes things relatively easy for the
+with Go and `git subtree` which makes things relatively easy for the
 other developers on my team, and still allows us to contribute changes
 back to the upstream authors.
 
@@ -40,21 +40,23 @@ Development Scenario
 ====================
 
 We're going to be writing a small application for our company
-example.com, and we're going to need a couple different libraries for
+'example.com', and we're going to need a couple different libraries for
 this project.
 
-In one case, the [upsilon
+In one case, with the [upsilon
 project](https://github.com/jamesgraves/upsilon), we don't anticipate
 needing to make any major changes to the library, we will definitely
 want to stay up-to-date with improvements to it, and we will probably
 just be contributing bugfixes back to the upstream author.
 
-The other library [omicron](https://github.com/jamesgraves/omicron)
-we've decided to fork, because we're planning on making incompatible
-changes to the library.
+The other library is
+[omicron](https://github.com/jamesgraves/omicron), and we've decided
+to fork it, because we're planning on making incompatible changes to
+it.
 
 I've already forked these two projects on GitHub, and if you're
-following along, you may want to do the same.
+following along, you may want to do the same under your own account.
+Of course you'll then need to adjust the repository paths that follow.
 
 Initial Checkout
 ================
@@ -73,6 +75,10 @@ We're going to be using a per-project GOPATH.  This is because the
 entire project is under version control, and we want to be sure we've
 got the exact version of every file that goes into the build.
 
+We really can't do things like set GOPATH to `${HOME}` as is often
+suggested, because we want to make sure all the source code is in the
+main project repository.
+
 
 ```
 $ cd example-go-app/
@@ -82,20 +88,12 @@ $ export GOPATH=~/myproject/example-go-app
 Let's switch to a new branch so that we won't mess up the master
 branch used for this example.
 
-In this case, I had already 
 
 ```
 $ git checkout working
 Branch working set up to track remote branch working from origin.
 Switched to a new branch 'working'
-ls -R src/
-src/:
-example.com
-
-src/example.com:
-myapp
-
-src/example.com/myapp:
+$ ls src/example.com/myapp/
 example_main.go
 ```
 
@@ -141,6 +139,10 @@ From github.com:jamesgraves/omicron
 
 Don't worry about the 'no common commits' that is to be expected.
 
+As before, I had already created 'working' branches, so you may want
+to do that first.  Otherwise, you can push / pull from master in all
+the following examples.
+
 We can now add the library as a subtree in our existing project.
 
 Since we're going to fork this library, we're going to put it in our
@@ -173,7 +175,7 @@ stored in the main .git directory.
 The omicron library is pretty basic:
 
 ```
-cat src/github.com/jamesgraves/omicron/lib.go
+$ cat src/github.com/jamesgraves/omicron/lib.go
 package omicron
 
 import ( "fmt" )
@@ -215,6 +217,7 @@ lib.go	LICENSE  README.md
 
 As before, the library is somewhat unambitious.
 
+```
 $ cat src/github.com/upstream-author/upsilon/lib.go
 package upsilon
 
