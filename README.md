@@ -55,8 +55,9 @@ to fork it, because we're planning on making incompatible changes to
 it.
 
 I've already forked these two projects on GitHub, and if you're
-following along, you may want to do the same under your own account.
+following along, you will want to do the same under your own account.
 Of course you'll then need to adjust the repository paths that follow.
+
 
 Initial Checkout
 ================
@@ -186,7 +187,11 @@ func Foo() {
 ```
 
 For the upsilon library that we're only going to make bugfixes to,
-we're not going to change the original directory heirarchy.
+we're not going to change the original directory heirarchy.  So we
+aren't going to change location for where it lives in our project
+directory.  It is going to end up in the same place as if we had just
+run `go get github.com/upstream-author/upsilon` (if upstream-author
+actually existed).
 
 ```
 $ mkdir -p src/github.com/upstream-author
@@ -215,7 +220,7 @@ $ ls src/github.com/upstream-author/upsilon
 lib.go	LICENSE  README.md
 ```
 
-As before, the library is somewhat unambitious.
+As with the omicron library, upsilon is also somewhat unambitious.
 
 ```
 $ cat src/github.com/upstream-author/upsilon/lib.go
@@ -258,7 +263,8 @@ Whew!  That was a lot more work than just running `go get`.
 Edit and Push Changes to Libraries
 ==================================
 
-Let's push the updated library back to the 'working' branch.
+Let's push these imported libraries into our central project
+repository to the 'working' branch.
 
 ```
 $ git status
@@ -285,12 +291,11 @@ To git@github.com:jamesgraves/example-go-app.git
 ```
 
 Time to make a small bug fix for upsilon, and push that back to our
-own example project.  Note that we haven't pushed our chagnes to back
-to the library project itself.
+own example project.
 
 ```
-vi src/github.com/upstream-author/upsilon/lib.go 
-cat src/github.com/upstream-author/upsilon/lib.go 
+$ vi src/github.com/upstream-author/upsilon/lib.go 
+$ cat src/github.com/upstream-author/upsilon/lib.go 
 package upsilon
 
 import ( "fmt" )
@@ -298,7 +303,6 @@ import ( "fmt" )
 func Bar() {
 	fmt.Println("This is Bar() from package upsilon, with a small bugfix.")
 }
-```
 git commit -m 'Bugfix for print.' src/github.com/upstream-author/upsilon/lib.go
 [working c4d49fb] Bugfix for print.
  1 file changed, 1 insertion(+), 1 deletion(-)
@@ -309,9 +313,12 @@ Counting objects: 7, done.
 To git@github.com:jamesgraves/example-go-app.git
    926bda2..c4d49fb  working -> working
 ```
+Note that we haven't pushed our changes to back to the library project
+itself, just to our application project.
 
-However, that won't really help the other users of the upsilon
-library, so we need to push that bug fix back to our fork on upsilon.
+Since that won't really help the other users of the upsilon library
+(because our main project may not be public), we need to push that bug
+fix back to our fork on upsilon.  
 
 ```
 $ git subtree push --prefix=src/github.com/upstream-author/upsilon upsilon-vendor working
