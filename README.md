@@ -11,7 +11,7 @@ There are many ways to build and maintain a Go project that requires
 external libraries.
 
 The simplest way (which is already built into the Go toolchain itself)
-is to just run `go get` on all your dependancies, and hope that the
+is to just run `go get` on all your dependencies, and hope that the
 library authors don't ever introduce breaking changes into their code. 
 For small and personal projects that is fine, but for people who are
 writing code for a living, that isn't nearly good enough.
