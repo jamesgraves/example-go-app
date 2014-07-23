@@ -390,10 +390,6 @@ $ git subtree pull --prefix src/github.com/upstream-author/upsilon upsilon-vendo
 ```
 You'll be offered to edit the merge commit message.
 
-Note that for the `--prefix` above, we have to specify the directory
-upsilon is in.  Before with the `subtree add`, the `--prefix` used
-with that command specified the parent directory where upsilon should go.
-
 Conclusion: That was waaaayyyy too much work!
 =============================================
 
