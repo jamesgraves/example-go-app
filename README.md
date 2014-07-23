@@ -11,7 +11,7 @@ There are many ways to build and maintain a Go project that requires
 external libraries.
 
 The simplest way (which is already built into the Go toolchain itself)
-is to just run `go get` on all your dependancies, and hope that the
+is to just run `go get` on all your dependencies, and hope that the
 library authors don't ever introduce breaking changes into their code. 
 For small and personal projects that is fine, but for people who are
 writing code for a living, that isn't nearly good enough.
@@ -389,10 +389,6 @@ fork, and then pull it into our project.
 $ git subtree pull --prefix src/github.com/upstream-author/upsilon upsilon-vendor working --squash
 ```
 You'll be offered to edit the merge commit message.
-
-Note that for the `--prefix` above, we have to specify the directory
-upsilon is in.  Before with the `subtree add`, the `--prefix` used
-with that command specified the parent directory where upsilon should go.
 
 Conclusion: That was waaaayyyy too much work!
 =============================================
