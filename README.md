@@ -187,13 +187,13 @@ func Foo() {
 ```
 
 For the upsilon library that we're only going to make bugfixes to,
-we're not going to change the original directory heirarchy.  So we
+we're not going to change the original directory hierarchy.  So we
 aren't going to change location for where it lives in our project
 directory.  It is going to end up in the same place as if we had just
 run `go get github.com/upstream-author/upsilon` (if upstream-author
 actually existed).
 
-By not changing the directory heirarchy, that reduces the need to
+By not changing the directory hierarchy, that reduces the need to
 change the import paths of other code that also uses the upsilon
 library.
 
@@ -317,7 +317,7 @@ Counting objects: 7, done.
 To git@github.com:jamesgraves/example-go-app.git
    926bda2..c4d49fb  working -> working
 ```
-Note that we haven't pushed our changes to back to the library project
+Note that we haven't pushed our changes back to the library project
 itself, just to our application project.
 
 Since that won't really help the other users of the upsilon library
